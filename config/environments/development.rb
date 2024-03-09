@@ -1,6 +1,13 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  
+  config.after_initialize do
+    if defined?(Rails::Server) 
+      puts 'Running crawler:run...'
+      `rake crawler:run` 
+    end
+  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -32,6 +39,7 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
@@ -74,3 +82,4 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 end
+
