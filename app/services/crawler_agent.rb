@@ -1,4 +1,3 @@
-
 require 'nokogiri'
 require 'httparty'
 
@@ -15,6 +14,10 @@ class ValorantCrawler
   private
 
   def parse_html(html)
+    Champion.delete_all 
+    ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='champions'")
+
+
     doc = Nokogiri::HTML(html)
     table_rows = doc.css('div#table-scroll table.stats-table tbody tr')
 
