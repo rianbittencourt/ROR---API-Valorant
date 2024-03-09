@@ -1,6 +1,13 @@
 # app/controllers/agents_controller.rb
 
 class AgentsController < ApplicationController
+
+  def index
+    champions = Champion.all
+    render json: champions, status: :ok
+  end
+
+
   def show
     @agent = Champion.find_by(name: params[:name])
 
