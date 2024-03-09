@@ -4,7 +4,7 @@ class AgentsController < ApplicationController
 
   def index
     champions = Champion.all
-    render json: champions, status: :ok
+    render json: champions.map { |champion| champion.slice(:name, :winrate, :pickrate) }, status: :ok
   end
 
 
